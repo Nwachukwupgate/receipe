@@ -6,7 +6,7 @@ import ReceipeCards from "@/components/homeSection/ReceipeCards";
 
 export default function Home() {
   return (
-    <main classNameName="bg-white dark:bg-gray-900 container mx-auto">
+    <main className="bg-white dark:bg-gray-900 container mx-auto">
       <div className="relative bg-yellow-50 dark:bg-gray-900">
         <div className="container m-auto px-6 pt-8 md:px-12 lg:pt-[1.8rem] lg:px-7">
             <div className="flex items-center flex-wrap px-2 md:px-0">

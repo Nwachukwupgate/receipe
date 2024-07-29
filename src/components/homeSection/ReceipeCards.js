@@ -57,7 +57,7 @@ const ReceipeCards = () => {
                         <h2 className="text-xl font-medium title-font text-gray-700 dark:text-gray-200 mt-5">{receipe?.title}</h2>
                         <Link href={`/${receipe?._id}`}>
                             <div className="text-yellow-900 font-bold inline-flex items-center mt-3">View
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <svg fill="none" stroke="currentColor" strokeLineCap="round" strokeLineJoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
                             </svg>
                             </div>
