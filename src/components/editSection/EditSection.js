@@ -1,14 +1,18 @@
-import React from 'react';
-import { updateRecipe } from '@/services/recipeService';
+'use client'
+
+import {useState, useEffect} from 'react';
+import { updateRecipe, getRecipeById } from '@/services/recipeService';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useRouter } from 'next/navigation'
 
 const EditSection = ({id}) => {
     const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
     const [image, setImage] = useState(null);
     const [instructions, setInstructions] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter()
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -23,7 +27,7 @@ const EditSection = ({id}) => {
         };
 
         fetchRecipe();
-    }, [recipeId, setValue]);
+    }, [id, setValue]);
 
     const onSubmit = async (data) => {
         setIsLoading(true);
@@ -39,9 +43,10 @@ const EditSection = ({id}) => {
                 console.warn('No image file provided');
             }
     
-            const response = await updateRecipe(formData); // Use createRecipe function from api.js
+            const response = await updateRecipe(id, formData); // Use createRecipe function from api.js
     
-            console.log('Recipe created successfully:', response);
+           alert('Recipe created successfully:', response);
+           router.push('/')
             reset();
             setInstructions('');
         } catch (error) {
@@ -59,8 +64,8 @@ const EditSection = ({id}) => {
     };
 
   return (
-    <div className="p-12">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="p-12 md:w-3/5 m-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col gap-3">
                 <div>
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                         Title
@@ -97,11 +102,11 @@ const EditSection = ({id}) => {
                         theme="snow"
                         value={instructions}
                         onChange={(value) => setInstructions(value)}
-                        className="my-2 h-64"
+                        className="my-2 "
                     />
                 </div>
 
-                <div className="my-8">
+                <div>
                     <label htmlFor="image" className="block text-sm font-medium text-gray-700">
                         Image
                     </label>
@@ -111,14 +116,14 @@ const EditSection = ({id}) => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
-                        className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                        className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:text-yellow-700 file:bg-[#eddaca] hover:file:bg-[#ebeae9]"
                     />
                 </div>
 
                 <div className="flex justify-center">
                     <button
                         type="submit"
-                        className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white ${isLoading ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}`}
+                        className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white ${isLoading ? 'bg-gray-400' : 'bg-yellow-900 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'}`}
                         disabled={isLoading}
                     >
                         {isLoading ? 'Submitting...' : 'Submit'}

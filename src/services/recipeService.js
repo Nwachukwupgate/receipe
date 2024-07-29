@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api/recipes';
+const API_URL = 'https://recipe-api-sl2q.onrender.com/api/recipes';
 
 export const getRecipes = async (page = 1, limit = 10) => {
     const response = await axios.get(API_URL, {

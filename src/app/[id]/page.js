@@ -49,57 +49,45 @@ export default function page({params}) {
 
     return (
         <>
-            <main className="container mx-auto mt-10">
-                <div className="mb-4 md:mb-0 w-full mx-auto relative">
+            <main className="container flex flex-col justify-center mt-10 px-8 w-full">
+                <div className="mb-4 md:mb-0 w-full relative ">
                     <div className="px-4 lg:px-0">
-                        <h2 className="text-4xl font-semibold text-gray-800 leading-tight">
+                        <h2 className="text-4xl font-semibold text-gray-800 leading-tight pb-3">
                             {recipe?.title}
                         </h2>
-                        <a 
-                            href="#"
-                            className="py-2 text-green-700 inline-flex items-center justify-center mb-2"
-                        >
-                            Cook Book
-                        </a>
                     </div>
-                    <img 
-                        src={`${recipe?.imageUrl}&auto=format&fit=crop&w=2100&q=80`} 
-                        className="w-full object-cover lg:rounded" 
-                        style={{ height: "28em" }} 
-                        alt="Cover"
-                    />
+                   <div className='flex justify-center w-3/5'> 
+                        <img 
+                            src={recipe?.imageUrl}
+                            className=" object-cover lg:rounded" 
+                            style={{ height: "28em" }} 
+                            alt="Cover"
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col lg:flex-row lg:space-x-12">
                     <div className="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4">
-                        <p className="pb-6">
-                            Advantage old had otherwise sincerity dependent additions. It in adapted natural hastily is
-                            justice. Six draw you him full not mean evil. Prepare garrets it expense windows shewing do an. 
-                        </p>
-                        <p className="pb-6">
-                            Difficulty on insensible reasonable in. From as went he they. Preference themselves me as
-                            thoroughly partiality considered on in estimating. Middletons acceptance discovered projecting so is so or. 
-                        </p>
+                        
 
                         <div className="pb-6">
-                            <div className="px-4 sm:px-8 max-w-5xl m-auto">
-                                <h1 className="font-semibold text-2xl">Ingredients</h1>
+                            <div className="max-w-5xl m-auto">
+                                <h1 className="font-semibold text-2xl pb-2">Ingredients</h1>
                                 
                                 <ul className="border border-gray-200 rounded overflow-hidden shadow-md">
                                     <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">{recipe?.ingredients}</li>
                                   
                                 </ul>
-                                <a href="mailto:jefte_caro@yahoo.com" className="text-xs text-center block mt-4 hover:underline">@me</a>
                             </div>
                         </div>
                         
-                        <h1 className="font-semibold text-2xl pb-6">Instructions</h1>
-                        <div className="border-l-4 border-gray-500 pl-4 mb-6 italic rounded">
-                            {recipe?.instructions} 
-                        </div>
+                        <h1 className="font-semibold text-2xl pb-2">Instructions</h1>
+                        <div className="border-l-4 border-gray-500 pl-4 mb-6 italic rounded"
+                            dangerouslySetInnerHTML={{ __html: recipe?.instructions }} />
+
                         
                         
                     </div>
-                    <div className="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
+                    {/* <div className="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
                         <div className="p-4 border-t border-b md:border md:rounded">
                             <div className="flex py-2">
                                 <img 
@@ -120,7 +108,7 @@ export default function page({params}) {
                                 <i className='bx bx-user-plus ml-2'></i>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </main>
 

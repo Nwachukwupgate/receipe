@@ -12,13 +12,13 @@ const Navbar = () => {
 
   return (
     <nav className="w-full relative bg-white shadow dark:bg-gray-800">
-      <div className="container px-6 py-4 mx-auto bg-yellow-50 dark:bg-gray-800">
+      <div className=" w-full  px-6 py-4 bg-yellow-50 dark:bg-gray-800">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             
             <a href="/" className="flex flex-row gap-1 items-center">
-              <h2 className="font-bold text-2xl text-yellow-900">Recipes</h2>
-              <img className="w-auto h-12 sm:h-7" src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png" alt="" />
+              <h2 className="font-bold text-2xl text-[#3e250f] dark:text-[#79512d]">Recipes</h2>
+              <img className="w-auto h-7 " src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png" alt="" />
             </a>
 
             <div className="flex lg:hidden">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-[#fbefbb] dark:hover:bg-gray-700 text-bold"
                 >
                   {link.text}
                 </Link>
