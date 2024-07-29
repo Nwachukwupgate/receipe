@@ -5,7 +5,7 @@ import SpeedDial from '@/components/utility/SpeedDial';
 import { getRecipeById } from '@/services/recipeService';
 
 
-export default function page({params}) {
+export default function Page({params}) {
     const id = params.id
     const [recipe, setRecipe] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
