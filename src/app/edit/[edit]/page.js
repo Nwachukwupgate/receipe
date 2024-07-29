@@ -2,7 +2,7 @@
 
 import EditSection from "@/components/editSection/EditSection";
 
-export default function Page({params}) {
+export default function Edit({params}) {
     const id = params.edit
     return (
         <>
