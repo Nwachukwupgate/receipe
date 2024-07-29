@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { createRecipe } from '@/services/recipeService';
 import { useRouter } from 'next/navigation'
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const CreateSection =() => {
     const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
