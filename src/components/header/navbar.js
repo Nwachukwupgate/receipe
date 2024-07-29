@@ -5,10 +5,20 @@ import { useState } from "react";
 
 import { links } from "@/config/config";
 import ThemeToggleCanvas from "../ThemeToggleCanvas";
+import themeState from '@/store';
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(true);
+
+  const toggleTheme = () => {
+    themeState.darkMode = !themeState.darkMode;
+    if (themeState.darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   return (
     <nav className="w-full relative bg-white shadow dark:bg-gray-800">
@@ -94,7 +104,7 @@ const Navbar = () => {
                   <ThemeToggleCanvas />
                 </div>
 
-                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Theme</h3>
+                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden" onClick={toggleTheme}>Theme</h3>
               </button>
             </div>
           </div>
