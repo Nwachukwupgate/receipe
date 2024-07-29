@@ -9,7 +9,7 @@ const GlobeSection = () => {
         </div>
 
         <div className="flex flex-col justify-around pt-[5%] relative md:flex-row gap-4 md:gap-2 px-6">
-            <div className="xl:h-[500px] xl:w-[500px] bg-[url('https://res.cloudinary.com/dyu76ha5j/image/upload/v1722103209/EEA96629-17BC-464D-8926-FEBB2CCEB502-removebg-preview_sj8kag.png')] bg-center bg-cover opacity-30 absolute top-2 z-10 w-[600px] h-[600px]"></div>
+            <div className="xl:h-[500px] xl:w-[500px] bg-[url('https://res.cloudinary.com/dyu76ha5j/image/upload/v1722103209/EEA96629-17BC-464D-8926-FEBB2CCEB502-removebg-preview_sj8kag.png')] bg-center bg-cover opacity-30 absolute top-2 z-10 w-full lg:w-[600px] h-[600px]"></div>
 
             <div className='md:max-w-xs bg-[#eddaca] dark:bg-[#9d8877] sm:pr-4 p-3 h-fit rounded'>
                 <h4 className="opacity-100 text-2xl text-gray-700 font-bold">Gourmet Delights</h4>
