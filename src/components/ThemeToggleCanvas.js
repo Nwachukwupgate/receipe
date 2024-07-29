@@ -5,9 +5,11 @@ import { useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import themeState from '@/store';
 
+
 const ThemeToggleCanvas = () => {
   const canvasRef = useRef(null);
   const snap = useSnapshot(themeState);
+  
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,6 +38,8 @@ const ThemeToggleCanvas = () => {
 
     draw();
   }, [snap.darkMode]);
+
+  
 
   const toggleTheme = () => {
     themeState.darkMode = !themeState.darkMode;

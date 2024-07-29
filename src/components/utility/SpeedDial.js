@@ -1,13 +1,31 @@
 "use client"
 
 import React, { useState } from 'react';
+import { deleteRecipe } from '@/services/recipeService';
+import Link from 'next/link';
 
-const SpeedDial = () => {
+const SpeedDial = ({id}) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleDelete = async (id) => {
+    setIsLoading(true)
+    
+        try {
+            await deleteRecipe(id);
+            alert('Recipe deleted successfully');
+            isLoading(false)
+        } catch (err) {
+          isLoading(false)
+            setError(err.message);
+            alert('Error deleting recipe');
+        }
+  }                                                                                                                
 
   return (
     <div className="fixed bottom-6 right-24 group">
@@ -17,8 +35,7 @@ const SpeedDial = () => {
       >
         <ul className="text-sm text-gray-500 dark:text-gray-300">
           <li>
-            <a
-              href="#"
+            <div
               className="flex items-center px-5 py-2 border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white dark:border-gray-600"
             >
               <svg
@@ -30,12 +47,12 @@ const SpeedDial = () => {
               >
                 <path d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z" />
               </svg>
-              <span className="text-sm font-medium">New post</span>
-            </a>
+              <span className="text-sm font-medium" onClick={() => handleDelete(id)}>{isLoading ? "Loading" : "Delete Post"}</span>
+            </div>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              href={`/r/edit/${id}`}
               className="flex items-center px-5 py-2 border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white dark:border-gray-600"
             >
               <svg
@@ -48,8 +65,8 @@ const SpeedDial = () => {
                 <path d="M19 4h-1a1 1 0 1 0 0 2v11a1 1 0 0 1-2 0V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1ZM3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm9 13H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Z" />
                 <path d="M6 5H5v1h1V5Z" />
               </svg>
-              <span className="text-sm font-medium">New topic</span>
-            </a>
+              <span className="text-sm font-medium">Edit Post</span>
+            </Link>
           </li>
           <li>
             <a

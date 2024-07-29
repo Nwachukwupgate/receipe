@@ -15,7 +15,9 @@ const Navbar = () => {
       <div className="container px-6 py-4 mx-auto bg-yellow-50 dark:bg-gray-800">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
-            <a href="#">
+            
+            <a href="/" className="flex flex-row gap-1 items-center">
+              <h2 className="font-bold text-2xl text-yellow-900">Recipes</h2>
               <img className="w-auto h-12 sm:h-7" src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png" alt="" />
             </a>
 
@@ -68,12 +70,7 @@ const Navbar = () => {
                   {link.text}
                 </Link>
               ))}
-              <Link
-              href="google.com"
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  Home
-              </Link>
+              
             </div>
 
             <div className="flex items-center mt-4 lg:mt-0">
@@ -93,11 +90,11 @@ const Navbar = () => {
               </button>
 
               <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
-                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                <div className="w-4 h-4 overflow-hidden border-2 border-gray-400 rounded-full">
                   <ThemeToggleCanvas />
                 </div>
 
-                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Khatab wedaa</h3>
+                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Theme</h3>
               </button>
             </div>
           </div>

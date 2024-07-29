@@ -1,24 +1,69 @@
-import React from 'react';
-import SpeedDial from '@/components/utility/SpeedDial';
+'use client'
 
-export default function Details() {
+import {useState, useEffect} from 'react';
+import SpeedDial from '@/components/utility/SpeedDial';
+import { getRecipeById } from '@/services/recipeService';
+
+
+export default function page({params}) {
+    const id = params.id
+    const [recipe, setRecipe] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    // const router = useRouter();
+    // const { id } = router.query;
+
+    useEffect(() => {
+        const fetchRecipe = async () => {
+            setIsLoading(true);
+            try {
+                const data = await getRecipeById(id);
+                setRecipe(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+   
+        if (id) {
+            fetchRecipe();
+        }
+    }, [id]);
+
+    console.log(id);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    if (!recipe) {
+        return <div>No recipe found</div>;
+    }
+
+
     return (
         <>
             <main className="container mx-auto mt-10">
                 <div className="mb-4 md:mb-0 w-full mx-auto relative">
                     <div className="px-4 lg:px-0">
                         <h2 className="text-4xl font-semibold text-gray-800 leading-tight">
-                            Pellentesque a consectetur velit, ac molestie ipsum. Donec sodales, massa et auctor.
+                            {recipe?.title}
                         </h2>
                         <a 
                             href="#"
                             className="py-2 text-green-700 inline-flex items-center justify-center mb-2"
                         >
-                            Cryptocurrency
+                            Cook Book
                         </a>
                     </div>
                     <img 
-                        src="https://images.unsplash.com/photo-1587614387466-0a72ca909e16?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" 
+                        src={`${recipe?.imageUrl}&auto=format&fit=crop&w=2100&q=80`} 
                         className="w-full object-cover lg:rounded" 
                         style={{ height: "28em" }} 
                         alt="Cover"
@@ -40,11 +85,8 @@ export default function Details() {
                                 <h1 className="font-semibold text-2xl">Ingredients</h1>
                                 
                                 <ul className="border border-gray-200 rounded overflow-hidden shadow-md">
-                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">First Item</li>
-                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">Second Item</li>
-                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">Third Item</li>
-                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">Another Item</li>
-                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">Item for the Nth time</li>
+                                    <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">{recipe?.ingredients}</li>
+                                  
                                 </ul>
                                 <a href="mailto:jefte_caro@yahoo.com" className="text-xs text-center block mt-4 hover:underline">@me</a>
                             </div>
@@ -52,14 +94,9 @@ export default function Details() {
                         
                         <h1 className="font-semibold text-2xl pb-6">Instructions</h1>
                         <div className="border-l-4 border-gray-500 pl-4 mb-6 italic rounded">
-                            Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor
-                            expression unpleasing she led met. 
+                            {recipe?.instructions} 
                         </div>
-                        <p className="pb-6">
-                            Exquisite cordially mr happiness of neglected distrusts. Boisterous impossible unaffected he me
-                            everything. 
-                        </p>
-                        <h2 className="text-2xl text-gray-800 font-semibold mb-4 mt-4">Uneasy barton seeing remark happen his has</h2>
+                        
                         
                     </div>
                     <div className="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
@@ -87,7 +124,7 @@ export default function Details() {
                 </div>
             </main>
 
-            <SpeedDial />
+            <SpeedDial id={id} />
         </>
     );
 }

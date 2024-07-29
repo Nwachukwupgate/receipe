@@ -1,16 +1,29 @@
-'use client'
-
-import React, { useState } from 'react';
+import React from 'react';
+import { updateRecipe } from '@/services/recipeService';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { createRecipe } from '@/services/recipeService';
 
-export default function Create() {
+const EditSection = ({id}) => {
     const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
     const [image, setImage] = useState(null);
     const [instructions, setInstructions] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchRecipe = async () => {
+          try {
+            const recipe = await getRecipeById(id);
+            setValue('title', recipe.title);
+            setValue('ingredients', recipe.ingredients);
+            setInstructions(recipe.instructions);
+          } catch (error) {
+            console.error('Error fetching recipe:', error);
+          }
+        };
+
+        fetchRecipe();
+    }, [recipeId, setValue]);
 
     const onSubmit = async (data) => {
         setIsLoading(true);
@@ -26,7 +39,7 @@ export default function Create() {
                 console.warn('No image file provided');
             }
     
-            const response = await createRecipe(formData); // Use createRecipe function from api.js
+            const response = await updateRecipe(formData); // Use createRecipe function from api.js
     
             console.log('Recipe created successfully:', response);
             reset();
@@ -44,10 +57,9 @@ export default function Create() {
         setImage(file); // Set image file to state
         setValue('image', e.target.files); // Update react-hook-form value
     };
-    
 
-    return (
-        <div className="p-12">
+  return (
+    <div className="p-12">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">
@@ -114,5 +126,7 @@ export default function Create() {
                 </div>
             </form>
         </div>
-    );
+  )
 }
+
+export default EditSection
